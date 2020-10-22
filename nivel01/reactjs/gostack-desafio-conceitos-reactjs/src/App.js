@@ -29,14 +29,18 @@ function App() {
     ));
   }
 
-  async function handleAddLike(id) {
+  async function handleLikeRepository(id) {
     const response = await api.post(`repositories/${id}/like`);
 
-    const newRepositories = repositories.filter(
-      repository => repository.id !== id
-    );
-    
-    setRepositories([ ...newRepositories, response.data]);
+    const repositoriesUpdated = repositories.map(repository => {
+      if (repository.id === id){
+        return response.data;
+      } else {
+        return repository;
+      }
+    });
+
+    setRepositories(repositoriesUpdated);
   }
 
   return (
@@ -45,12 +49,12 @@ function App() {
           {repositories.map(repository => (
               <li key={repository.id}>
                 {repository.title}
-                <p><a href={repository.url}> | GitHub</a> | Likes: {repository.likes}</p>
+                <p><a href={repository.url}> | GitHub</a> | {repository.likes} curtidas</p>
                 <button onClick={() => handleRemoveRepository(repository.id)}>
                   Remover
                 </button>
-                <button onClick={() => handleAddLike(repository.id)}>
-                  Like !
+                <button onClick={() => handleLikeRepository(repository.id)}>
+                  Curtir !
                 </button>
               </li>
           ))}
