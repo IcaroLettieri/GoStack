@@ -3,7 +3,7 @@ import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 /**
  * [X] Recebimento das informações
- * [/] Tratativa de erros/excessões
+ * [X] Tratativa de erros/excessões
  * [X] Acesso ao repositorio
  */
 
